@@ -1,8 +1,8 @@
-#    schedule:
+#schedule:
 
 #- cron: 0 0 * * *
-#  watch:
-#    types: started
+ #watch:
+     #types: started
 
 
 
@@ -19,6 +19,8 @@
 name: Build OpenWrt
 
 on:
+  watch:
+     types: started
   repository_dispatch:
   workflow_dispatch:
     inputs:
@@ -166,7 +168,7 @@ jobs:
       uses: softprops/action-gh-release@v1
       if: steps.tag.outputs.status == 'success' && !cancelled()
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.XJY_TOKEN }}
       with:
         tag_name: ${{ steps.tag.outputs.release_tag }}
         body_path: release.txt
@@ -185,4 +187,4 @@ jobs:
         keep_latest: 3
         delete_tags: true
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.XJY_TOKEN }}
